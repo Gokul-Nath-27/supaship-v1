@@ -4,23 +4,7 @@ import "../styles/home.css";
 import supabase from "../config/client";
 
 const Home = () => {
-  const [user, setUser] = useState({});
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const getUserData = async () => {
-      try {
-        await supabase.auth.getUser().then((response) => {
-          console.log(response);
-          setUser(response?.data?.user);
-        });
-      } catch (err) {
-        console.log(err);
-        alert(err);
-      }
-    };
-    getUserData();
-  }, []);
 
   const signOutUser = async () => {
     const { error } = await supabase.auth.signOut();
@@ -32,9 +16,11 @@ const Home = () => {
   };
 
   return (
-    <div className="home">
-      <button onClick={ () => signOutUser()}>Sign Out</button>
-    </div>
+      <div className="home">
+        {}
+        <h1>Hello Logged in user!</h1>
+        <button onClick={ () => signOutUser()}>Sign Out</button>
+      </div>
   );
 };
 
